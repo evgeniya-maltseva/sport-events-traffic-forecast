@@ -1,0 +1,17 @@
+{
+  "exclude_network_data_prefix": "prepared/dictionaries/exclude_network_name/exclude_network_name.json",
+  "history_depth": "365",
+  "input_airings_data_prefix": "prepared/aggregated_airings",
+  "input_baseline_data_prefix": "predictions/baseline_aggregated",
+  "input_mch_rankings_data_prefix": "prepared/mens-college-hockey_rankings_krach",
+  "input_netbase_data_prefix": "prepared/netbase_metrics",
+  "input_nhl_rankings_data_prefix": "prepared/nhl_rankings",
+  "input_scheduled_tasks_data_prefix": "prepared/scheduled_tasks_ts",
+  "input_watchgraph_data_prefix": "prepared/elb-watch-graph-api-traffic-events-network-5min-agg-within-event",
+  "traffic_threshold": "-1",
+  "min_sample_days": "1",
+  "use_league_features": "true",
+  "use_media_features": "true",
+  "use_team_features": "false",
+  "num_val_events": "30"
+}

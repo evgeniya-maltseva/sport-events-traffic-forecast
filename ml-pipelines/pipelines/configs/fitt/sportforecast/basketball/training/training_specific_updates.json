@@ -1,0 +1,82 @@
+{
+  "instances_configuration": {
+    "meta_data_steps_instance_type": "ml.m5.xlarge"
+  },
+  "metric": "smape",
+  "metric_threshold": "0.33",
+  "model_defs": {
+    "LinearLearner1": {
+      "evaluation_image": {
+        "framework": "mxnet",
+        "image_scope": "training",
+        "py_version": "py37",
+        "version": "1.8.0"
+      },
+      "evaluation_script": "evaluate_linear_learner.py",
+      "hyperparams": {
+        "loss": "squared_loss",
+        "mini_batch_size": "20",
+        "optimizer": "adam",
+        "predictor_type": "regressor"
+      },
+      "training_image": {
+        "framework": "linear-learner"
+      }
+    },
+    "XGB1": {
+      "evaluation_image": {
+        "framework": "xgboost",
+        "version": "1.2-1"
+      },
+      "evaluation_script": "evaluate_xgboost.py",
+      "hyperparams": {
+        "alpha": "1.05",
+        "colsample_bytree": "0.5",
+        "csv_weights": "1",
+        "eta": "0.15",
+        "eval_metric": "mae",
+        "gamma": "0",
+        "lambda": "0.1",
+        "max_depth": "6",
+        "min_child_weight": "1",
+        "num_round": "80",
+        "objective": "reg:squarederror",
+        "seed": "42",
+        "subsample": "0.9",
+        "verbosity": "1"
+      },
+      "training_image": {
+        "framework": "xgboost",
+        "version": "1.2-1"
+      }
+    },
+    "XGB2": {
+      "evaluation_image": {
+        "framework": "xgboost",
+        "version": "1.2-1"
+      },
+      "evaluation_script": "evaluate_xgboost.py",
+      "hyperparams": {
+        "alpha": "0.55",
+        "colsample_bytree": "0.9",
+        "csv_weights": "1",
+        "eta": "0.15",
+        "eval_metric": "mae",
+        "gamma": "0",
+        "lambda": "1.0",
+        "max_depth": "6",
+        "min_child_weight": "1",
+        "num_round": "45",
+        "objective": "reg:squarederror",
+        "seed": "42",
+        "subsample": "0.7",
+        "verbosity": "1"
+      },
+      "training_image": {
+        "framework": "xgboost",
+        "version": "1.2-1"
+      }
+    }
+  },
+  "smoothed_extra_traffic": "false"
+}

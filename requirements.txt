@@ -1,0 +1,7 @@
+sagemaker==2.93.0
+pandas==1.2.2
+Jinja2==3.0.1
+smart_open
+requests
+fsspec
+s3fs

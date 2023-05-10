@@ -1,0 +1,26 @@
+{
+  "input_traffic_data_prefix": "prepared/datadog_clean",
+  "exclude_dates_prefix": "prepared/dictionaries/exclude_dates/exclude_dates.json",
+  "encoder_path_prefix": "prepared/feature_transformation/encoder",
+  "scaler_path_prefix": "prepared/feature_transformation/scaler",
+  "instances_configuration": {
+    "meta_data_steps_instance_count": 1,
+    "processing_instance_count": 1,
+    "register_model_instance_types": [
+      "ml.c4.2xlarge",
+      "ml.c4.4xlarge",
+      "ml.c4.xlarge",
+      "ml.c5.2xlarge",
+      "ml.c5.4xlarge",
+      "ml.c5.xlarge",
+      "ml.m4.2xlarge",
+      "ml.m4.4xlarge",
+      "ml.m4.xlarge",
+      "ml.m5.2xlarge",
+      "ml.m5.4xlarge",
+      "ml.m5.large",
+      "ml.m5.xlarge"
+    ],
+    "training_instance_count": 1
+  }
+}

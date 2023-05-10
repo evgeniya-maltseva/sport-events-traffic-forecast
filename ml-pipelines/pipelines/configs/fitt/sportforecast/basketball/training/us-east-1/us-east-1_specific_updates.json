@@ -1,0 +1,10 @@
+{
+  "model_defs": {
+    "XGB1": {
+      "enabled": "true"
+    },
+    "XGB2": {
+      "enbled": "false"
+    }
+  }
+}

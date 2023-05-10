@@ -1,0 +1,17 @@
+{
+  "encode_hour": "false",
+  "input_calendar_data_prefix": "prepared/calendar_views/basketball",
+  "feature_group_name_suffix": "basketball-v0",
+  "instances_configuration": {
+    "processing_instance_type": "ml.c5.2xlarge",
+    "training_instance_type": "ml.c5.2xlarge"
+  },
+  "sport_name": "basketball",
+  "use_competition_features": "true",
+  "use_date_features": "true",
+  "use_n_tasks_feature": "true",
+  "use_netbase_features": "true",
+  "use_on_watch_espn": "true",
+  "use_rank_features": "false",
+  "history_depth": "-1"
+}

@@ -1,0 +1,6 @@
+{
+  "instances_configuration": {
+    "meta_data_steps_instance_type": "ml.m5.large"
+  },
+  "smoothed_extra_traffic": "False"
+}
