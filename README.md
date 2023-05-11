@@ -1,12 +1,15 @@
 # Sport traffic prediction using AWS Sagemaker
 
-This project presents a code for building Amazon SageMaker Pipelines (**ml-pipelines**) to create end-to-end workflows that manage and deploy SageMaker jobs aimed to train models and predict time series of sport events requests traffic with 10 days horizon on the hockey example
 
-The project also contains additional examples of **data-ingestion** steps and **postprocessing** steps which supposed to be managed separately.
+This project includes code for building Amazon SageMaker Pipelines (**ml-pipelines**) to create end-to-end workflows that manage and deploy SageMaker jobs aimed to train models and predict time series of sport events requests traffic with 10 days horizon, based on the example of hockey.
 
-The e2e DAG is composed in MWAA (Amazon Airflow) and simplified schema is below
+Additionally, the project includes examples of **data-ingestion** and **postprocessing** steps, which supposed to be managed separately.
+
+The end-to-end Directed Acyclic Graph (DAG) is created using MWAA (Amazon Airflow), and a simplified schema is shown below.
 
 ![e2e prediction dag](e2e.jpeg)
+
+### Data ingestion
 
 **Data ingestion** part includes ingesting data from various sources: Newrelic, Datadog, client's internal databases, APIs, logs and others.
 Presented examples: 
@@ -19,6 +22,7 @@ Presented examples:
 
 Data ingestion part of the e2e DAG also includes steps with various data transformations and filtering, preparing dataset for using in ml-pipelines.
 
+### ML pipelines
 
 For running **ML pipelines** local_vars.sh should be filled with appropriate variables. 
 It suppose having an access to AWS platform. 
@@ -27,6 +31,8 @@ Besides, *run_pipeline.py* compose the configuration by joining dictionaries wit
 The configuration dictionary primarily includes environment variables, constant variables, paths to input files and data dictionaries, settings for which features to utilize, and model hyperparameters.
 
 ml-pipelines/pipelines/**train** and ml-pipelines/pipelines/**prediction** includes the corresponding pipelines definitions and python scripts for some steps.
+
+![train_pipeline](ml-pipelines/pipelines/training/train_pipeline.png)
 
 The **training pipeline** of sports models involves the following steps:
 
@@ -37,8 +43,26 @@ The **training pipeline** of sports models involves the following steps:
 5. **approve**: if the metrics meet the required standards, the model is approved and registered in *Sagemaker Model Registry*, and the Encoder and Scaler path are attached to the trained and approved model. 
 6. **notify**: a notification is then sent to Slack regarding the newly trained model.
 
+![train_pipeline](ml-pipelines/pipelines/prediction/prediction_pipeline.png)
 The **prediction pipeline** of sports models consists of the following steps:
+
 1. **collect** step is the same as in training pipeline.
 2. **prepare** features step functions similarly to prepare step in training pipeline except it reads the scaler and encoder from paths where they were saved during training.
 3. **prediction**: predictions are made with the last approved model from *Model Registry* on prediction dataset.
 4. **postprocess** predictions: timestamps attached to predicted values
+
+### Postprocessing
+
+The postprocessing examples provided are:
+
+- anomaly detection using the Random Cut Forest, a built-in algorithm in Sagemaker, to identify anomalies in predictions and metrics.
+- near-real time (NRT) forecast. Utilizing all available information up to the current moment, the near-real-time forecast predicts traffic for the upcoming 2 hours. It provides information about near-real-time changes, which may not be due to sporting events and, therefore, can adjust the number of scheduled tasks which were previously calculated based on sport traffic forecast.
+
+The logic adjustments  NRT forecast is below
+![nrt](postprocessing/nrt_forecast/nrt.jpg)
+
+An example:
+![nrt](postprocessing/nrt_forecast/emulation_fitt_us-east-1.gif)
+
+
+
