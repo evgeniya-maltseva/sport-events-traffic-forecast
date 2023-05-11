@@ -44,6 +44,7 @@ The **training pipeline** of sports models involves the following steps:
 6. **notify**: a notification is then sent to Slack regarding the newly trained model.
 
 ![train_pipeline](ml-pipelines/pipelines/prediction/prediction_pipeline.png)
+
 The **prediction pipeline** of sports models consists of the following steps:
 
 1. **collect** step is the same as in training pipeline.
@@ -55,13 +56,15 @@ The **prediction pipeline** of sports models consists of the following steps:
 
 The postprocessing examples provided are:
 
-- anomaly detection using the Random Cut Forest, a built-in algorithm in Sagemaker, to identify anomalies in predictions and metrics.
-- near-real time (NRT) forecast. Utilizing all available information up to the current moment, the near-real-time forecast predicts traffic for the upcoming 2 hours. It provides information about near-real-time changes, which may not be due to sporting events and, therefore, can adjust the number of scheduled tasks which were previously calculated based on sport traffic forecast.
+- **anomaly detection** using the Random Cut Forest, a built-in algorithm in Sagemaker, to identify anomalies in predictions and metrics.
+- **near-real time (NRT) forecast**. Utilizing all available information up to the current moment, the near-real-time forecast predicts traffic for the upcoming 2 hours. It provides information about near-real-time changes, which may not be due to sporting events and, therefore, can adjust the number of scheduled tasks which were previously calculated based on sport traffic forecast.
 
 The logic adjustments  NRT forecast is below
+
 ![nrt](postprocessing/nrt_forecast/nrt.jpg)
 
 An example:
+
 ![nrt](postprocessing/nrt_forecast/emulation_fitt_us-east-1.gif)
 
 

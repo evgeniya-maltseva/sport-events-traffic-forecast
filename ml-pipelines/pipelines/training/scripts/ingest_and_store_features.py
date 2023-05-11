@@ -45,9 +45,9 @@ def combine_from_parquets(base_dir, data_dir, fields=None, year='*',
                          f'sport_partition={sport}',
                          f'league_partition={league}',
                          '*parquet')
-    # logger.info(paths)
+
     all_parquet_files = glob.glob(paths)
-    # logger.info(all_parquet_files)
+
     df = pq.ParquetDataset(all_parquet_files).read_pandas().to_pandas().sort_values(by='starttime')
     if client is not None:
         df = df[df['client_app'] == client]
@@ -223,10 +223,6 @@ def prepare_model_data(service_traffic_vs_events_traffic, cur_sport_calendar,
     service_traffic_vs_events_traffic_agg = pd.merge(service_traffic_vs_events_traffic,
                                                      cur_sport_calendar_exploded_by_filler, how='inner',
                                                      left_on=['event_id', 'event_time'], right_on=['id', 'filler'])
-    
-    # service_traffic_vs_events_traffic_agg = service_traffic_vs_events_traffic_agg.groupby(['id']).apply(lambda x: find_target_count(x))
-    # service_traffic_vs_events_traffic_agg = service_traffic_vs_events_traffic_agg.groupby(['id']).agg(
-    #     {'target': agg_fun, 'service_count': agg_fun}).rename(columns={'target':TARGET_METRIC}).reset_index()
 
     service_traffic_vs_events_traffic_agg = service_traffic_vs_events_traffic_agg.groupby(['id']).agg(
         {TARGET_METRIC: agg_fun, 'service_count': agg_fun}).reset_index()
@@ -298,7 +294,6 @@ def filler(start, end):
     for i in range(-300, delta.seconds + 601, 300):
         filler = start + timedelta(seconds=i)
 
-        # if (filler > start) & (filler < end):
         yield filler
 
 
@@ -363,7 +358,6 @@ def cast_object_to_string(data_frame):
 def prepare_feature_data(data, prediction_date, event_time, service, region, event_time_feature_name='EventTime', data_type='training'):
     feature_data = data.copy()
     feature_data[event_time_feature_name] = event_time
-    # feature_data[event_time_feature_name] = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
     feature_data["prediction_date"] = str(pd.to_datetime(prediction_date).date())
     feature_data["data_type"] = data_type
     feature_data["service"] = service

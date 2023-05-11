@@ -306,7 +306,6 @@ if __name__ == "__main__":
     num_val_events = args.num_val_events
     logger.info(sport_name)
     logger.debug("Attempting to import unprepared feature from Feature Store")
-    # feature_group_name = f"features-unprocessed-{sport_name}-v0"
     feature_store_prefix = "aiop-sport-feature-store"
     logger.info(f"Prediction date: {prediction_date}")
 
